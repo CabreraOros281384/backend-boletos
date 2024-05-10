@@ -2,8 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 //const jwt = require('jsonwebtoken')
-const admin = require('firebase-admin')
-const serviceAccount = require('./config/serviceAccountKey.json')
+
 
 //Rutas que vamos a usar 
 const auth = require('./routes/auth')
@@ -11,11 +10,6 @@ const user = require('./routes/users')
 
 //Declarar variable para el servidor web
 const app = express()
-
-//Inicializar Firebase Admin SDK 
-admin.initializeApp({
-    credential : admin.credential.cert(serviceAccount)
-})
 
 //Middleware
 app.use(cors())
