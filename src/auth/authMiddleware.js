@@ -1,22 +1,26 @@
-const jwt = require ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization']
-
-    if (!token){
+    const access = token.split(' ')
+    console.log('@@ token => ', token)
+    if (!access[1]) {
         return res.status(401).json({
-            message: 'Unuathorized'
+            message: 'Unathorized'
         })
     }
-    jwt.verify(token, process.env.SECRET,  (err, user) => {
+
+    jwt.verify(access[1], process.env.SECRET, (err, user) => {
         if (err) {
-            return res.status (403).json({
-                message : 'Forbidden'
+            return res.status(403).json({
+                message: 'Forbidden'
             })
         }
+
         req.user = user
-        next ()
+        next()
     })
 }
-module.exports = authenticateToken 
+
+module.exports = authenticateToken

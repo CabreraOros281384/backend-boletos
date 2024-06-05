@@ -1,8 +1,10 @@
 const admin = require('firebase-admin')
-const serviceAccount = require('serviceAccountKey.json')
+const serviceAccount = require('./serviceAccountKey.json')
+process.env.TZ = 'America/Mexico_City';
 
-//Inicializar Firebase Admin SDK 
+// Inicializar firebase-admin.
 admin.initializeApp({
-    credential : admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
 })
-module.export = admin 
+
+module.exports = admin
